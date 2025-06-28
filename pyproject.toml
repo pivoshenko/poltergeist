@@ -59,7 +59,11 @@ docstring-code-format = true
 quote-style = "double"
 
 [tool.ruff.lint]
-ignore = ["D203", "D213", "COM812"]
+ignore = [
+  "D203",  # one-blank-line-before-class (conflicts with D211)
+  "D213",  # multi-line-docstring-summary-second-line (conflicts with D212)
+  "COM812" # missing-trailing-comma (conflicts with formatter)
+]
 select = ["ALL"]
 
 [tool.ruff.lint.isort]
@@ -75,7 +79,11 @@ required-imports = ["from __future__ import annotations"]
   "D105", # Missing docstring in magic method
   "D107"  # Missing docstring in __init__
 ]
-"test_*.py" = ["D103", "INP001", "S101"]
+"test_*.py" = [
+  "D103",   # Missing docstring in public function
+  "INP001", # File is part of an implicit namespace package
+  "S101"    # Use of assert detected
+]
 
 [build-system]
 requires = ["hatchling"]
