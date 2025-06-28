@@ -1,8 +1,15 @@
+"""Tests for the module that contains decorators for catching exceptions."""
+
+from __future__ import annotations
+
 import operator
 
 import pytest
 
-from poltergeist import Err, Ok, catch, catch_async
+from poltergeist import Err
+from poltergeist import Ok
+from poltergeist import catch
+from poltergeist import catch_async
 
 
 def test_decorator() -> None:
@@ -12,7 +19,7 @@ def test_decorator() -> None:
 
     match decorated(4, 0):
         case Err(e):
-            assert type(e) == ZeroDivisionError
+            assert isinstance(e, ZeroDivisionError)
             assert e.args == ("division by zero",)
         case _:
             pytest.fail("Should have been Err")
@@ -36,14 +43,14 @@ def test_decorator_multiple_errors() -> None:
 
     match decorated(4, 0):
         case Err(e):
-            assert type(e) == ZeroDivisionError
+            assert isinstance(e, ZeroDivisionError)
             assert e.args == ("division by zero",)
         case _:
             pytest.fail("Should have been Err")
 
     match decorated("4", 0):
         case Err(e):
-            assert type(e) == TypeError
+            assert isinstance(e, TypeError)
             assert e.args == ("unsupported operand type(s) for /: 'str' and 'int'",)
         case _:
             pytest.fail("Should have been Err")
@@ -59,7 +66,7 @@ async def test_async_decorator() -> None:
 
     match await decorated(4, 0):
         case Err(e):
-            assert type(e) == ZeroDivisionError
+            assert isinstance(e, ZeroDivisionError)
             assert e.args == ("division by zero",)
         case _:
             pytest.fail("Should have been Err")
@@ -89,14 +96,14 @@ async def test_async_decorator_multiple_errors() -> None:
 
     match await decorated(4, 0):
         case Err(e):
-            assert type(e) == ZeroDivisionError
+            assert isinstance(e, ZeroDivisionError)
             assert e.args == ("division by zero",)
         case _:
             pytest.fail("Should have been Err")
 
-    match await decorated("4", 0):
+    match await decorated("4", 0):  # type: ignore[arg-type]
         case Err(e):
-            assert type(e) == TypeError
+            assert isinstance(e, TypeError)
             assert e.args == ("unsupported operand type(s) for /: 'str' and 'int'",)
         case _:
             pytest.fail("Should have been Err")
