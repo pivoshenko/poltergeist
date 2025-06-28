@@ -56,7 +56,7 @@ class Ok(Generic[_T_co]):
         """Return the wrapped value, ignoring the default."""
         return self.unwrap()
 
-    def unwrap_or_else(self, op: Callable[[_E_co], _D]) -> _T_co:  # noqa: ARG002
+    def unwrap_or_else(self, op: Any) -> _T_co:  # noqa: ANN401, ARG002
         """Return the wrapped value, ignoring the operation."""
         return self.unwrap()
 
