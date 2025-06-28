@@ -59,7 +59,7 @@ docstring-code-format = true
 quote-style = "double"
 
 [tool.ruff.lint]
-ignore = []
+ignore = ["D203", "D213", "COM812"]
 select = ["ALL"]
 
 [tool.ruff.lint.isort]
@@ -75,6 +75,7 @@ required-imports = ["from __future__ import annotations"]
   "D105", # Missing docstring in magic method
   "D107"  # Missing docstring in __init__
 ]
+"test_*.py" = ["D103", "INP001", "S101"]
 
 [build-system]
 requires = ["hatchling"]
