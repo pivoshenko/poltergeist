@@ -5,13 +5,25 @@
 
 [Rust-like error handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) in Python, with type-safety in mind.
 
+## Features
+
+- 🦀 **Rust-inspired**. Familiar `Result<T, E>` type for Rust developers
+- 🔒 **Type-safe**. Full `mypy` compatibility with proper generic typing
+- 🎯 **Pattern matching**. Native support for Python 3.10+ match statements
+- ⚡ **Async support**. Built-in `catch_async` decorator for async functions
+- 🎨 **Clean API**. Minimal, intuitive interface
+
 ## Installation
 
-```
+```shell
+uv add poltergeist
+# or
 pip install poltergeist
+# or
+poetry add poltergeist
 ```
 
-## Examples
+## Quick Start
 
 Use the `@catch` decorator on any function:
 
@@ -62,8 +74,10 @@ err: OSError | None = result.err()
 match result:
     case Ok(content):
         print("Text in upper:", content.upper())
-    case Err(FileNotFoundError() as e):
+    case Err(e) if isinstance(e, FileNotFoundError):
         print("File not found:", e.filename)
+    case Err(e):
+        print("Other error:", e)
 ```
 
 It's also possible to wrap multiple exception types with the decorator:
@@ -98,30 +112,4 @@ async def read_text(path: str) -> str:
 
 # Returns an object of type Result[str, OSError]
 result = await read_text("my_file.txt")
-```
-
-## Contributing
-
-Set up the project using [Poetry](https://python-poetry.org/):
-
-```
-poetry install
-```
-
-Format the code:
-
-```
-make lint
-```
-
-Run tests:
-
-```
-make test
-```
-
-Check for typing and format issues:
-
-```
-make check
 ```
