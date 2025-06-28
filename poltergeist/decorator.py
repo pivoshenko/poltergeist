@@ -26,7 +26,7 @@ _P = ParamSpec("_P")
 def catch(
     *errors: type[_E],
 ) -> Callable[[Callable[_P, _T]], Callable[_P, Result[_T, _E]]]:
-    """Catch specified exceptions and return ``Ok`` on success or ``Err`` on exception."""
+    """Catch specified exceptions and return Ok on success or Err on exception."""
 
     def decorator(func: Callable[_P, _T]) -> Callable[_P, Result[_T, _E]]:
         @functools.wraps(func)
@@ -45,10 +45,7 @@ def catch(
 def catch_async(
     *errors: type[_E],
 ) -> Callable[[Callable[_P, Awaitable[_T]]], Callable[_P, Awaitable[Result[_T, _E]]]]:
-    """Catch specified exceptions in async functions.
-
-    Return ``Ok`` on success or ``Err`` on exception.
-    """
+    """Catch specified exceptions in async function and return Ok on success or Err on exception."""
 
     def decorator(func: Callable[_P, Awaitable[_T]]) -> Callable[_P, Awaitable[Result[_T, _E]]]:
         @functools.wraps(func)
