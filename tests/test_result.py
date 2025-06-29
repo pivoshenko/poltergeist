@@ -16,7 +16,7 @@ def test_ok() -> None:
             assert v == "abc"
         case _:
             pytest.fail("Should have been Ok")
-    # type: ignore[misc]
+
     assert result.err() is None  # type: ignore[func-returns-value]
     assert result.unwrap() == "abc"
     assert result.unwrap_or() == "abc"
