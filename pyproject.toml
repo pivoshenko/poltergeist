@@ -3,6 +3,10 @@ name = "poltergeist"
 version = "0.0.0"
 description = "Rust-like error handling in Python, with type-safety in mind."
 authors = [{ name = "Alexander Malyga", email = "alexander@malyga.io" }]
+maintainers = [
+  { name = "Alexander Malyga", email = "alexander@malyga.io" },
+  { name = "Volodymyr Pivoshenko", email = "volodymyr.pivoshenko@gmail.com" }
+]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.10"
